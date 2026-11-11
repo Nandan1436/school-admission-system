@@ -1,3 +1,7 @@
 <Solution>
   <Project Path="SchoolAdmission.Api/SchoolAdmission.Api.csproj" />
+  <Project Path="SchoolAdmission.Data/SchoolAdmission.Data.csproj" />
+  <Project Path="SchoolAdmission.Domain/SchoolAdmission.Domain.csproj" />
+  <Project Path="SchoolAdmission.Services/SchoolAdmission.Services.csproj" />
+  <Project Path="SchoolAdmission.Tests/SchoolAdmission.Tests.csproj" />
 </Solution>

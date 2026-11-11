@@ -1,0 +1,131 @@
+@reference "../../styles/global.css";
+
+.countdown {
+  @apply font-mono text-[13px] font-semibold tabular-nums;
+  color: var(--accent);
+}
+
+.countdownLg {
+  @apply font-mono text-[32px] font-bold leading-none tracking-[-0.03em] tabular-nums;
+  color: var(--accent);
+}
+
+.countdownLow {
+  color: var(--up);
+}
+
+.timerBox {
+  @apply flex flex-wrap items-end justify-between gap-3 rounded-xl border px-4 py-4;
+  background: var(--bg-2);
+  border-color: var(--border-soft);
+}
+
+.timerLabel {
+  @apply text-[12px] font-semibold;
+  color: var(--fg-dim);
+}
+
+.timerDone {
+  @apply font-mono text-[15px] font-bold tracking-[0.04em];
+  color: var(--fg-dim);
+}
+
+.details {
+  @apply m-0 mt-5 grid gap-4 sm:grid-cols-2;
+}
+
+.detail {
+  @apply flex min-w-0 flex-col gap-1;
+}
+
+.detail dt {
+  @apply text-[12px] font-semibold;
+  color: var(--fg-faint);
+}
+
+.detail dd {
+  @apply m-0 truncate text-[13.5px];
+  color: var(--fg);
+}
+
+.note {
+  @apply m-0 text-[13px] leading-relaxed;
+  color: var(--fg-dim);
+}
+
+.note a {
+  @apply font-semibold underline underline-offset-2;
+  color: var(--accent);
+}
+
+.actions {
+  @apply mt-5 flex flex-wrap justify-end gap-3 border-t pt-5;
+  border-color: var(--border-soft);
+}
+
+.table {
+  @apply w-full border-collapse text-[13px];
+}
+
+.table th {
+  @apply px-4 py-3 text-left text-[12px] font-semibold;
+  color: var(--fg-faint);
+  background: var(--bg-2);
+}
+
+.table td {
+  @apply border-t px-4 py-3 align-middle;
+  border-color: var(--border-soft);
+  color: var(--fg);
+}
+
+.table tbody tr {
+  transition: background 0.15s;
+}
+
+.table tbody tr:hover {
+  background: var(--surface-2);
+}
+
+.className {
+  @apply font-semibold;
+}
+
+.mutedCell {
+  color: var(--fg-faint);
+}
+
+.alignRight {
+  @apply text-right;
+}
+
+.tableWrap {
+  @apply overflow-x-auto;
+}
+
+.cards {
+  @apply hidden flex-col;
+}
+
+.cardRow {
+  @apply flex flex-col gap-2 border-t px-4 py-3;
+  border-color: var(--border-soft);
+}
+
+.cardRow:first-child {
+  @apply border-t-0;
+}
+
+.cardRowHead {
+  @apply flex items-start justify-between gap-3;
+}
+
+@media (max-width: 640px) {
+  .tableWrap {
+    @apply hidden;
+  }
+
+  .cards {
+    @apply flex;
+  }
+}

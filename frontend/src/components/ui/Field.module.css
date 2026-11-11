@@ -1,0 +1,77 @@
+@reference "../../styles/global.css";
+
+.field {
+  @apply flex min-w-0 flex-col gap-1.5;
+}
+
+.label {
+  @apply text-[12px] font-semibold;
+  color: var(--fg-dim);
+}
+
+.input,
+.select {
+  @apply w-full rounded-[10px] border px-3 py-2.5 text-[13.5px] outline-none;
+  background: var(--surface-2);
+  border-color: var(--border);
+  color: var(--fg);
+  transition: border-color 0.15s;
+}
+
+.input::placeholder {
+  color: var(--fg-faint);
+}
+
+.input:focus {
+  border-color: var(--accent);
+}
+
+.mono {
+  @apply font-mono tracking-[0.04em] tabular-nums;
+}
+
+.invalid,
+.invalid:focus {
+  border-color: var(--up);
+}
+
+.selectWrap {
+  @apply relative flex items-center;
+}
+
+.selectWrap svg {
+  @apply pointer-events-none absolute right-3 h-[14px] w-[14px];
+  color: var(--fg-faint);
+}
+
+.selectWrap:focus-within .select {
+  border-color: var(--accent);
+}
+
+.selectWrapInvalid {
+  composes: selectWrap;
+}
+
+.selectWrapInvalid .select {
+  border-color: var(--up);
+}
+
+.select {
+  @apply appearance-none pr-9;
+  cursor: pointer;
+}
+
+.select option {
+  background: var(--surface);
+  color: var(--fg);
+}
+
+.error {
+  @apply m-0 text-[12px];
+  color: var(--up);
+}
+
+.hint {
+  @apply m-0 text-[12px];
+  color: var(--fg-faint);
+}
