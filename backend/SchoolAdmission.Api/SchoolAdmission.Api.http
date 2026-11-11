@@ -1,6 +1,34 @@
-@SchoolAdmission.Api_HostAddress = http://localhost:5264
+@baseUrl = http://localhost:8080
+@studentId = 20152691234567890
+@classId = replace-with-class-id
+@holdId = replace-with-hold-id
 
-GET {{SchoolAdmission.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{baseUrl}}/classes
+Content-Type: application/json
+
+{ "name": "Class 6 - Morning Shift", "totalSeats": 120 }
 
 ###
+GET {{baseUrl}}/classes
+
+###
+GET {{baseUrl}}/classes/{{classId}}
+
+###
+POST {{baseUrl}}/classes/{{classId}}/holds
+X-Student-Id: {{studentId}}
+
+###
+GET {{baseUrl}}/holds/{{holdId}}
+
+###
+POST {{baseUrl}}/holds/{{holdId}}/confirm
+X-Student-Id: {{studentId}}
+
+###
+DELETE {{baseUrl}}/holds/{{holdId}}
+X-Student-Id: {{studentId}}
+
+###
+GET {{baseUrl}}/me/holds
+X-Student-Id: {{studentId}}
