@@ -1,0 +1,218 @@
+@reference "../../styles/global.css";
+
+.navbar {
+  @apply sticky top-0 z-30 border-b backdrop-blur-[10px];
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  border-color: var(--border-soft);
+}
+
+.navInner {
+  @apply mx-auto flex h-16 w-full max-w-[1240px] items-center gap-6 px-4 min-[901px]:px-10;
+}
+
+.brand {
+  @apply flex flex-none items-center gap-2.5;
+}
+
+.logo {
+  @apply inline-flex h-[30px] w-[30px] items-center justify-center rounded-[9px];
+  background: linear-gradient(135deg, var(--accent), #ef4444);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+.logo svg {
+  @apply h-4 w-4;
+}
+
+.wordmark {
+  @apply text-[16px] font-extrabold tracking-[-0.02em];
+  color: var(--fg);
+}
+
+.links {
+  @apply flex flex-1 items-center gap-1;
+}
+
+.link {
+  @apply inline-flex items-center gap-2 rounded-[9px] px-3 py-2 text-[13.5px] font-medium;
+  color: var(--fg-dim);
+  transition: background 0.15s;
+}
+
+.link:hover {
+  color: var(--fg);
+  background: var(--surface-2);
+}
+
+.link svg {
+  @apply h-[15px] w-[15px];
+}
+
+.linkActive {
+  composes: link;
+  color: var(--fg);
+  background: var(--surface-2);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+.navActions {
+  @apply ml-auto flex items-center gap-2;
+}
+
+.iconButton {
+  @apply inline-flex h-9 w-9 items-center justify-center rounded-[10px] border;
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--fg-dim);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.iconButton:hover {
+  background: var(--surface-2);
+  color: var(--fg);
+}
+
+.iconButton svg {
+  @apply h-4 w-4;
+}
+
+.menuButton {
+  composes: iconButton;
+  @apply hidden;
+}
+
+.mobilePanel {
+  @apply hidden flex-col gap-1 border-t px-4 py-3;
+  border-color: var(--border-soft);
+}
+
+.studentBar {
+  @apply border-b;
+  background: var(--bg-2);
+  border-color: var(--border-soft);
+}
+
+.studentInner {
+  @apply mx-auto flex w-full max-w-[1240px] flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2.5 min-[901px]:px-10;
+}
+
+.studentLabel {
+  @apply inline-flex items-center gap-2 text-[12px] font-semibold;
+  color: var(--fg-dim);
+}
+
+.studentLabel svg {
+  @apply h-[15px] w-[15px];
+  color: var(--accent);
+}
+
+.studentForm {
+  @apply flex min-w-0 flex-1 flex-wrap items-start gap-2;
+}
+
+.studentInput {
+  @apply w-full max-w-[300px] flex-1;
+}
+
+.studentInput input {
+  @apply py-1.5;
+}
+
+.studentCurrent {
+  @apply flex min-w-0 flex-wrap items-center gap-2.5;
+}
+
+.studentHint {
+  @apply text-[12.5px];
+  color: var(--fg-faint);
+}
+
+.studentId {
+  @apply font-mono text-[13px] font-semibold tracking-[0.04em] tabular-nums;
+  color: var(--fg);
+}
+
+.footer {
+  @apply mt-16 border-t;
+  border-color: var(--border-soft);
+}
+
+.footerInner {
+  @apply mx-auto flex w-full max-w-[1240px] flex-wrap justify-between gap-2 px-4 py-6 text-[12px] min-[901px]:px-10;
+  color: var(--fg-faint);
+}
+
+.eyebrow {
+  @apply mb-2 text-[11px] font-bold uppercase tracking-[0.1em];
+  color: var(--accent);
+}
+
+.pageHead {
+  @apply mt-8 mb-6 flex items-end justify-between gap-6;
+}
+
+.pageHead h1 {
+  @apply m-0 text-[32px] font-bold leading-[1.1] tracking-[-0.035em];
+  color: var(--fg);
+}
+
+.pageHead p {
+  @apply mt-3 mb-0 max-w-[720px] text-[14.5px] leading-[1.65];
+  color: var(--fg-dim);
+}
+
+.sectionHead {
+  @apply mt-10 mb-4 flex items-end justify-between gap-6;
+  scroll-margin-top: 80px;
+}
+
+.sectionHead h2 {
+  @apply m-0 text-[22px] font-bold tracking-[-0.02em];
+  color: var(--fg);
+}
+
+.sectionHead p {
+  @apply mt-1.5 mb-0 text-[13px];
+  color: var(--fg-dim);
+}
+
+.headActions {
+  @apply flex flex-none flex-wrap items-center gap-2;
+}
+
+@media (max-width: 960px) {
+  .links {
+    @apply hidden;
+  }
+
+  .menuButton {
+    @apply inline-flex;
+  }
+
+  .mobilePanel {
+    @apply flex;
+  }
+}
+
+@media (max-width: 900px) {
+  .pageHead,
+  .sectionHead {
+    @apply flex-col items-start gap-4;
+  }
+
+  .pageHead h1 {
+    @apply text-[26px];
+  }
+}
+
+@media (max-width: 420px) {
+  .hideXs {
+    @apply hidden;
+  }
+
+  .wordmark {
+    @apply text-[14px];
+  }
+}
