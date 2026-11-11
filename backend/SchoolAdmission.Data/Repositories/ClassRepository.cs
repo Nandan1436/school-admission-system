@@ -20,8 +20,7 @@ public class ClassRepository(AppDbContext db) : IClassRepository
             .SingleOrDefaultAsync(ct);
 
     public async Task<IReadOnlyList<ClassWithSeats>> GetAllWithSeatsAsync(DateTime utcNow, CancellationToken ct = default) =>
-        await WithSeats(db.Classes.AsNoTracking(), utcNow)
-            .OrderBy(c => c.Name)
+        await WithSeats(db.Classes.AsNoTracking().OrderBy(c => c.Name), utcNow)
             .ToListAsync(ct);
 
     public Task<ClassWithSeats?> GetWithSeatsAsync(Guid id, DateTime utcNow, CancellationToken ct = default) =>
