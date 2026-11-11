@@ -30,9 +30,27 @@ public class ClassTests(DatabaseFixture fixture) : ApiTestBase(fixture)
     }
 
     [Theory]
+    [InlineData("Class 6 - Morning Shift")]
+    [InlineData("Class 6 – Morning Shift")]
+    [InlineData("class 10 — day shift")]
+    [InlineData("  Class 1 -  Day Shift  ")]
+    public async Task ValidClassName_IsAccepted(string name)
+    {
+        var response = await Client.PostAsJsonAsync("/classes", new { name, totalSeats = 10 });
+
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+    }
+
+    [Theory]
     [InlineData("", 10)]
-    [InlineData("Class 8", 0)]
-    [InlineData("Class 8", -5)]
+    [InlineData("67", 10)]
+    [InlineData("Class 8", 10)]
+    [InlineData("Class 0 - Morning Shift", 10)]
+    [InlineData("Class 11 - Morning Shift", 10)]
+    [InlineData("Class 6 - Evening Shift", 10)]
+    [InlineData("Test Class", 10)]
+    [InlineData("Class 8 - Day Shift", 0)]
+    [InlineData("Class 8 - Day Shift", -5)]
     public async Task InvalidClass_ReturnsBadRequest(string name, int totalSeats)
     {
         var response = await Client.PostAsJsonAsync("/classes", new { name, totalSeats });

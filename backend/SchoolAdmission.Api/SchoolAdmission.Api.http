@@ -3,6 +3,10 @@
 @classId = replace-with-class-id
 @holdId = replace-with-hold-id
 
+GET {{baseUrl}}/class-options
+
+###
+
 POST {{baseUrl}}/classes
 Content-Type: application/json
 

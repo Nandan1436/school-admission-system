@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using SchoolAdmission.Data;
 using SchoolAdmission.Data.Models;
@@ -9,7 +10,7 @@ using SchoolAdmission.Services.Interfaces;
 
 namespace SchoolAdmission.Services;
 
-public class ClassService(
+public partial class ClassService(
     IClassRepository classRepository,
     IUnitOfWork unitOfWork,
     TimeProvider timeProvider) : IClassService
@@ -30,6 +31,12 @@ public class ClassService(
         {
             throw new ValidationException(ErrorCodes.InvalidRequest,
                 $"Class name must be at most {MaxNameLength} characters.");
+        }
+
+        if (!ClassNamePattern().IsMatch(name))
+        {
+            throw new ValidationException(ErrorCodes.InvalidRequest,
+                "Class name must look like \"Class 6 - Morning Shift\": Class 1 to 10, Morning or Day Shift.");
         }
 
         if (request.TotalSeats is < 1 or > MaxTotalSeats)
@@ -80,6 +87,9 @@ public class ClassService(
 
     private static ClassResponse ToResponse(ClassWithSeats c) =>
         new(c.Id, c.Name, c.TotalSeats, c.HeldSeats, c.ConfirmedSeats, c.AvailableSeats);
+
+    [GeneratedRegex(@"^Class\s+([1-9]|10)\s*[-–—]\s*(Morning|Day)\s+Shift$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
+    private static partial Regex ClassNamePattern();
 
     private static ConflictException ClassNameTaken(string name) =>
         new(ErrorCodes.ClassNameTaken, $"A class named \"{name}\" already exists.");

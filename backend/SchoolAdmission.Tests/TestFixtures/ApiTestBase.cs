@@ -16,12 +16,21 @@ public abstract class ApiTestBase(DatabaseFixture fixture) : IAsyncLifetime
 
     public Task DisposeAsync() => Task.CompletedTask;
 
+    private int _classCount;
+
     protected static string StudentId(int n) => (20150000000000000L + n).ToString();
+
+    protected string NextClassName()
+    {
+        var index = _classCount++;
+        var shift = index / 10 % 2 == 0 ? "Morning" : "Day";
+        return $"Class {index % 10 + 1} - {shift} Shift";
+    }
 
     protected async Task<CreateClassResponse> CreateClassAsync(int totalSeats, string? name = null, HttpClient? client = null)
     {
         var response = await (client ?? Client).PostAsJsonAsync("/classes",
-            new { name = name ?? $"Class {Guid.NewGuid():N}", totalSeats });
+            new { name = name ?? NextClassName(), totalSeats });
         response.EnsureSuccessStatusCode();
         return (await response.Content.ReadFromJsonAsync<CreateClassResponse>())!;
     }
