@@ -1,0 +1,36 @@
+@reference "../../styles/global.css";
+
+.card {
+  @apply flex min-w-0 flex-col rounded-2xl border;
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+.padded {
+  @apply px-[22px] py-5;
+}
+
+.head {
+  @apply mb-4 flex items-start justify-between gap-3;
+}
+
+.title {
+  @apply m-0 text-[15px] font-bold tracking-[-0.01em];
+  color: var(--fg);
+}
+
+.description {
+  @apply mt-1 mb-0 text-[12.5px];
+  color: var(--fg-dim);
+}
+
+.actions {
+  @apply flex flex-none items-center gap-2;
+}
+
+@media (max-width: 600px) {
+  .padded {
+    @apply p-4;
+  }
+}
