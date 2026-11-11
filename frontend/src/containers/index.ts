@@ -2,4 +2,5 @@ export * from "./ClassListContainer";
 export * from "./ClassStatsContainer";
 export * from "./CreateClassContainer";
 export * from "./HoldDetailContainer";
+export * from "./MyHoldsContainer";
 export * from "./StudentBarContainer";
