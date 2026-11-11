@@ -33,11 +33,14 @@ public partial class ClassService(
                 $"Class name must be at most {MaxNameLength} characters.");
         }
 
-        if (!ClassNamePattern().IsMatch(name))
+        var match = ClassNamePattern().Match(name);
+        if (!match.Success)
         {
             throw new ValidationException(ErrorCodes.InvalidRequest,
                 "Class name must look like \"Class 6 - Morning Shift\": Class 1 to 10, Morning or Day Shift.");
         }
+
+        name = ToCanonicalName(match);
 
         if (request.TotalSeats is < 1 or > MaxTotalSeats)
         {
@@ -90,6 +93,13 @@ public partial class ClassService(
 
     [GeneratedRegex(@"^Class\s+([1-9]|10)\s*[-–—]\s*(Morning|Day)\s+Shift$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
     private static partial Regex ClassNamePattern();
+
+    private static string ToCanonicalName(Match match)
+    {
+        var grade = match.Groups[1].Value;
+        var shift = char.ToUpperInvariant(match.Groups[2].Value[0]) + match.Groups[2].Value[1..].ToLowerInvariant();
+        return $"Class {grade} – {shift} Shift";
+    }
 
     private static ConflictException ClassNameTaken(string name) =>
         new(ErrorCodes.ClassNameTaken, $"A class named \"{name}\" already exists.");

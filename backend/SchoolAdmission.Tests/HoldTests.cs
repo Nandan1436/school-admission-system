@@ -139,8 +139,8 @@ public class HoldTests(DatabaseFixture fixture) : ApiTestBase(fixture)
         var holds = await response.Content.ReadFromJsonAsync<List<MyHoldResponse>>();
 
         Assert.Equal(2, holds!.Count);
-        Assert.Contains(holds, h => h.ClassName == "Class 6 - Morning Shift" && h.Status == "HELD");
-        Assert.Contains(holds, h => h.ClassName == "Class 6 - Day Shift");
+        Assert.Contains(holds, h => h.ClassName == "Class 6 – Morning Shift" && h.Status == "HELD");
+        Assert.Contains(holds, h => h.ClassName == "Class 6 – Day Shift");
     }
 
     private async Task<CreateHoldResponse> CreateHoldAsync(Guid classId, string studentId)

@@ -14,7 +14,7 @@ public class ClassTests(DatabaseFixture fixture) : ApiTestBase(fixture)
 
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         var body = await response.Content.ReadFromJsonAsync<CreateClassResponse>();
-        Assert.Equal("Class 6 - Morning Shift", body!.Name);
+        Assert.Equal("Class 6 – Morning Shift", body!.Name);
         Assert.Equal(120, body.TotalSeats);
         Assert.NotEqual(Guid.Empty, body.Id);
     }
@@ -25,6 +25,20 @@ public class ClassTests(DatabaseFixture fixture) : ApiTestBase(fixture)
         await CreateClassAsync(10, "Class 7 - Day Shift");
 
         var response = await Client.PostAsJsonAsync("/classes", new { name = "Class 7 - Day Shift", totalSeats = 10 });
+
+        Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+    }
+
+    [Theory]
+    [InlineData("Class 8 – Morning Shift")]
+    [InlineData("class 8 - morning shift")]
+    [InlineData("CLASS 8 — MORNING SHIFT")]
+    [InlineData("  Class 8  -  Morning   Shift ")]
+    public async Task SameClassWrittenDifferently_ReturnsConflict(string duplicate)
+    {
+        await CreateClassAsync(10, "Class 8 - Morning Shift");
+
+        var response = await Client.PostAsJsonAsync("/classes", new { name = duplicate, totalSeats = 10 });
 
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
     }
