@@ -6,6 +6,14 @@
 
 ## Classes
 - Each shift is its own class, e.g. "Class 6 - Morning Shift".
+- Class names must follow the format `Class <1-10> - <Morning|Day> Shift`, checked with this regex (case-insensitive):
+  `^Class\s+([1-9]|10)\s*[-–—]\s*(Morning|Day)\s+Shift$`
+  - Hyphen, en dash and em dash are all accepted, so the brief's own example `Class 6 – Morning Shift` is valid.
+  - Anything else (e.g. `67`, `Class 11 - Morning Shift`, `Class 6 - Evening Shift`) returns `400 INVALID_REQUEST`.
+  - The name is stored as sent (trimmed), not rewritten to one canonical spelling.
+  - Reason: the school only runs Class 1-10 in two shifts. The admin UI builds the name from two dropdowns filled by `GET /class-options`, and the regex stops free-text names sent directly to the API.
+  - Trade-off: a name outside this format (e.g. a third shift) is rejected. Supporting one later means changing the regex and the `/class-options` lists together.
+- `GET /class-options` is an extra endpoint (not in the brief) that returns `{ "grades": [...], "shifts": [...] }` for the admin form. It does not change any endpoint from the brief.
 - Class names are unique (`409 CLASS_NAME_TAKEN` on duplicates). Total seats must be between 1 and 10,000.
 - IDs are UUIDs (the brief allows any format).
 
