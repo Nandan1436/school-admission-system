@@ -1,3 +1,9 @@
+import { ThemeProvider } from "./context/ThemeContext";
+
 export function App() {
-  return <div className="min-h-screen bg-bg text-fg">School Admission</div>;
+  return (
+    <ThemeProvider>
+      <div className="min-h-screen bg-bg text-fg">School Admission</div>
+    </ThemeProvider>
+  );
 }
