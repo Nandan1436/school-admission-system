@@ -1,0 +1,49 @@
+@reference "../../styles/global.css";
+
+.stat {
+  @apply relative min-w-0 overflow-hidden rounded-2xl border px-[22px] py-5;
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+.stat::before {
+  @apply absolute inset-x-0 top-0 h-[3px];
+  content: "";
+  background: var(--c);
+}
+
+.head {
+  @apply flex items-center gap-2.5;
+}
+
+.icon {
+  @apply inline-flex h-7 w-7 items-center justify-center rounded-lg;
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  color: var(--c);
+}
+
+.icon svg {
+  @apply h-[15px] w-[15px];
+}
+
+.label {
+  @apply text-[12px] font-semibold;
+  color: var(--fg-dim);
+}
+
+.value {
+  @apply mt-3 text-[32px] font-bold leading-none tracking-[-0.03em] tabular-nums;
+  color: var(--fg);
+}
+
+.sub {
+  @apply mt-2 text-[12.5px];
+  color: var(--fg-faint);
+}
+
+@media (max-width: 600px) {
+  .stat {
+    @apply p-4;
+  }
+}

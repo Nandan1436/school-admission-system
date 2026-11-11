@@ -1,0 +1,48 @@
+@reference "../../styles/global.css";
+
+.pagination {
+  @apply mt-4 flex flex-wrap items-center justify-between gap-3;
+}
+
+.summary {
+  @apply text-[12.5px] tabular-nums;
+  color: var(--fg-dim);
+}
+
+.pages {
+  @apply flex items-center gap-1;
+}
+
+.page {
+  @apply inline-flex h-8 min-w-8 items-center justify-center rounded-lg border px-2 text-[12.5px] font-semibold tabular-nums;
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--fg-dim);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.page:hover:not(:disabled) {
+  background: var(--surface-2);
+  color: var(--fg);
+}
+
+.page:disabled {
+  @apply cursor-not-allowed opacity-50;
+}
+
+.page svg {
+  @apply h-[14px] w-[14px];
+}
+
+.pageActive {
+  composes: page;
+  border-color: var(--accent);
+  color: var(--fg);
+  background: var(--accent-soft);
+}
+
+.gap {
+  @apply px-1 text-[12.5px];
+  color: var(--fg-faint);
+}
