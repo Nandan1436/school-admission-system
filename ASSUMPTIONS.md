@@ -47,3 +47,10 @@
 - `ConnectionStrings__Default` (or `DATABASE_URL`): accepts both `Host=...;` and `postgresql://...` URLs (e.g. Neon).
 - `HOLD_DURATION_SECONDS`: default 600.
 - `CORS_ORIGINS`: comma-separated frontend origins.
+
+## UI
+- The birth registration number entered at the top of the page is stored in the browser's localStorage and sent as `X-Student-Id` on every request. That is how a student sees their applications again after a refresh or reopening the browser. Anyone who knows a number can act for that student; this follows from the brief having no login.
+- Create class uses two dropdowns (class 1–10 and Morning/Day shift from `GET /class-options`) and builds the name `Class N – X Shift`, so names always match the format the backend accepts.
+- Seat counts poll every 3 seconds; an open application and My applications poll every 5 seconds.
+- The countdown runs on the browser clock against `expiresAt`. When it reaches zero the UI shows EXPIRED and disables Pay straight away, then refetches. The server stays the source of truth: paying after expiry is still rejected with `409 HOLD_EXPIRED`, and a badly wrong client clock only affects the display until the next poll.
+- Every API error is shown as a readable message (the backend `detail`). If the server cannot be reached, the UI says so instead of showing a blank page. Lists longer than 20 items are paginated.
