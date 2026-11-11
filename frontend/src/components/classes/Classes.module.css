@@ -1,0 +1,128 @@
+@reference "../../styles/global.css";
+
+.grid {
+  @apply grid gap-4 md:grid-cols-2 xl:grid-cols-3;
+}
+
+.classCard {
+  @apply flex min-w-0 flex-col gap-4 rounded-2xl border px-[22px] py-5;
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.classCard:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent) 60%, var(--border));
+}
+
+.classHead {
+  @apply flex items-start justify-between gap-3;
+}
+
+.classHead h3 {
+  @apply m-0 min-w-0 text-[15px] font-bold tracking-[-0.01em];
+  color: var(--fg);
+}
+
+.badgeOpen {
+  @apply flex-none rounded-full border px-2.5 py-[3px] text-[11.5px] font-semibold tabular-nums;
+  color: var(--data);
+  border-color: color-mix(in srgb, var(--data) 40%, transparent);
+  background: var(--data-soft);
+}
+
+.badgeFull {
+  composes: badgeOpen;
+  color: var(--up);
+  border-color: color-mix(in srgb, var(--up) 40%, transparent);
+  background: color-mix(in srgb, var(--up) 14%, transparent);
+}
+
+.seatBar {
+  @apply flex h-2 w-full overflow-hidden rounded-full;
+  background: var(--surface-2);
+}
+
+.seatSegment {
+  @apply h-full;
+  background: var(--c);
+  box-shadow: 1px 0 0 var(--split-ink);
+  transition: width 0.4s ease;
+}
+
+.counts {
+  @apply grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-4;
+}
+
+.count {
+  @apply flex min-w-0 flex-col gap-0.5;
+}
+
+.countLabel {
+  @apply inline-flex items-center gap-1.5 text-[11.5px] font-semibold;
+  color: var(--fg-faint);
+}
+
+.countDot {
+  @apply inline-block h-[7px] w-[7px] rounded-full;
+  background: var(--c);
+}
+
+.countValue {
+  @apply font-mono text-[15px] font-bold tabular-nums;
+  color: var(--fg);
+}
+
+.classFoot {
+  @apply mt-auto flex flex-wrap items-center gap-3;
+}
+
+.footHint {
+  @apply text-[12.5px];
+  color: var(--fg-faint);
+}
+
+.live {
+  @apply inline-flex items-center gap-2 rounded-full border px-2.5 py-[3px] text-[11.5px] font-semibold;
+  color: var(--down);
+  border-color: color-mix(in srgb, var(--down) 40%, transparent);
+}
+
+.livePulse {
+  @apply inline-block h-[7px] w-[7px] animate-pulse rounded-full;
+  background: var(--down);
+}
+
+.stats {
+  @apply grid gap-4 sm:grid-cols-2 xl:grid-cols-4;
+}
+
+.formGrid {
+  @apply grid gap-4 sm:grid-cols-2;
+}
+
+.formFull {
+  @apply sm:col-span-2;
+}
+
+.preview {
+  @apply flex flex-wrap items-center gap-2 rounded-[10px] border border-dashed px-3 py-2.5 text-[12.5px];
+  border-color: var(--border);
+  color: var(--fg-dim);
+}
+
+.preview strong {
+  color: var(--fg);
+}
+
+.formActions {
+  @apply mt-2 flex flex-wrap items-center justify-end gap-3;
+}
+
+@media (max-width: 600px) {
+  .classCard {
+    @apply p-4;
+  }
+}
