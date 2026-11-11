@@ -12,6 +12,7 @@ public static class DependencyInjection
         services.AddSingleton(TimeProvider.System);
         services.AddScoped<IClassService, ClassService>();
         services.AddScoped<IHoldService, HoldService>();
+        services.AddSingleton<IClassOptionsService, ClassOptionsService>();
 
         return services;
     }
